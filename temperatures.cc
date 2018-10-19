@@ -12,15 +12,17 @@ double median(std::vector<T>);
 int main(){
 
   
-  std::ifstream inFile;
+  std::ifstream inFile;  //creates an ifstream to read from the .txt file 
   
-  inFile.open("temperatures.txt");
+  inFile.open("temperatures.txt"); //reads file
   
-  double value;
-  double sum;
-  std::vector<double> vector ; 
+  double value; //variable that will store the value read from file
   
-  while(inFile >> value){
+  std::vector<double> vector ; // vector that will contain all the values 
+  
+  /*the following loop allows us to store all the values that we read from the file inside the vector*/
+  
+  while(inFile >> value){   
   
     vector.push_back(value);
   
@@ -32,17 +34,12 @@ int main(){
   
   std::cout << "The median is " << median(vector) << std::endl;
 
-  /* for(i = 0; i < vector.size(); i++){
-  
-   std::cout << vector[i] << std::endl;
-  
-  }*/
-
+ 
 
   return 0;
 }
 
-
+/*MEAN FUNCTION */
 template <typename T>
 double mean(std::vector<T> vector){
 
@@ -61,6 +58,7 @@ double mean(std::vector<T> vector){
   return mean;
 }
 
+/*MEDIAN FUNCTION*/
 template <typename T>
 double median(std::vector<T> vector){
 
