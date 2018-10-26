@@ -40,6 +40,41 @@ Date::Date(int d, Month m, int y){
 
 }
 
+bool operator==(Date lhs, Date rhs ){
+
+ if( lhs.get_day() == rhs.get_day() &&
+     static_cast<int>(lhs.get_month())==static_cast<int>(rhs.get_month())&&
+     lhs.get_year() == rhs.get_year()){
+    
+    return true;
+    
+    } else {false; }
+
+
+}
+
+bool operator!=(Date lhs, Date rhs ){
+
+if(!(lhs == rhs)){
+	return true;
+} else {return false;}
+
+}
+//Overload  operator << for type Month
+std::ostream& operator<<(std::ostream& os, Month m) {
+	
+	os << static_cast<int>(m);
+	return os;
+}
+
+
+
+// Overload operator << for type Date
+std::ostream& operator<<(std::ostream& os, Date d) {
+	
+	os << d.get_day()<<"/"<<d.get_month()<<"/"<<d.get_year() <<std::endl;
+	return os;
+}
 
 
 
@@ -56,7 +91,7 @@ int main(){
  
  std::cout << "The day is " << data.get_day() << std::endl;
  
- std::cout << "The month is " << static_cast<int>(data.get_month()) << std::endl;
+ std::cout << "The month is " << data.get_month() << std::endl;
  
  std::cout << "The year is " << data.get_year() << std::endl;
  
@@ -69,35 +104,30 @@ int main(){
  data.add_days(elapse);
  
  
- std::cout << "The day is " << data.get_day() << std::endl;
- std::cout << "The month is " << static_cast<int>(data.get_month()) << std::endl;
- std::cout << "The year is " << data.get_year() << std::endl;
+ std::cout << data << std::endl;
+ 
+ Date data1 = Date(5,itom(3),1995);
+ Date data2 = Date(5,itom(3),1996);
+ Date data3 = Date(5,itom(3),1995);
+ 
+ bool test1 = (data1 == data2);
+ bool test2 = (data1 == data3);
+ 
+ std::cout << "test 1 = " << test1 <<std::endl;
+ std::cout << "test 2 = " << test2 <<std::endl;
+ 
  return 0;
+ 
+ 
  
 }
 
 
-//Overload of the << operator in order to print out the number of the month
-std::ostream& operator<<(std::ostream& os, Month m) {
-	
-	os << static_cast<int>(m) <<std::endl;
-	return os;
-}
-
-bool operator==( Date& lhs,  Date& rhs){
-
- if( lhs.get_day() == rhs.get_day() &&
-     static_cast<int>(lhs.get_month())==static_cast<int>(rhs.get_month())&&
-     lhs.get_year() == rhs.get_year()){
-    
-    return true;
-    
-    } else {false; }
 
 
-}
 
 
+// Implementations of the functions that converts int into Month
 Month itom(int i){
 
 	if(i > int(Month::jan) && i < (int(Month::dec)+1)){
