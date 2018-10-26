@@ -20,9 +20,9 @@ class Date{
 	
 	// the following functions allow us to get the day, the month and the year
 	
-	int get_day(){return day;} 
-	Month get_month(){return month;}
-	int get_year(){return year;}
+	const int get_day(){return day;} 
+	const Month get_month(){return month;}
+	const int get_year(){return year;}
 	
 	// Functions that allow us to add days to our date. 
 	
@@ -70,7 +70,7 @@ int main(){
  
  
  std::cout << "The day is " << data.get_day() << std::endl;
- std::cout << "The month is " << data.get_month() << std::endl;
+ std::cout << "The month is " << static_cast<int>(data.get_month()) << std::endl;
  std::cout << "The year is " << data.get_year() << std::endl;
  return 0;
  
@@ -84,6 +84,18 @@ std::ostream& operator<<(std::ostream& os, Month m) {
 	return os;
 }
 
+bool operator==( Date& lhs,  Date& rhs){
+
+ if( lhs.get_day() == rhs.get_day() &&
+     static_cast<int>(lhs.get_month())==static_cast<int>(rhs.get_month())&&
+     lhs.get_year() == rhs.get_year()){
+    
+    return true;
+    
+    } else {false; }
+
+
+}
 
 
 Month itom(int i){
@@ -157,21 +169,8 @@ void Date::add_days(const unsigned int n){
   	}
   
   counter += 1;
-  
-  
-  
-  
   }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  }
+ }
 
 
 
