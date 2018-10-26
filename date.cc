@@ -89,11 +89,7 @@ int main(){
  
  Date data = Date(dd,itom(mm),yy);
  
- std::cout << "The day is " << data.get_day() << std::endl;
- 
- std::cout << "The month is " << data.get_month() << std::endl;
- 
- std::cout << "The year is " << data.get_year() << std::endl;
+ std::cout << data << std::endl;
  
  unsigned  int elapse;
  
@@ -106,6 +102,7 @@ int main(){
  
  std::cout << data << std::endl;
  
+ //Examples to try out the overload of the operators
  Date data1 = Date(5,itom(3),1995);
  Date data2 = Date(5,itom(3),1996);
  Date data3 = Date(5,itom(3),1995);
