@@ -20,17 +20,19 @@ class Date{
 	
 	// the following functions allow us to get the day, the month and the year
 	
-	const int get_day(){return day;} 
-	const Month get_month(){return month;}
-	const int get_year(){return year;}
+	int get_day() const {return day;} 
+	Month get_month() const {return month;}
+	int get_year() const {return year;}
 	
 	// Functions that allow us to add days to our date. 
 	
 	void add_days(const unsigned int n);
 	void add_day(){Date::day += 1;}
+	
+	 
 };
 
-//Implementations of the contructor
+//Implementations of the constructor
 
 Date::Date(int d, Month m, int y){
 	
@@ -40,7 +42,12 @@ Date::Date(int d, Month m, int y){
 
 }
 
-bool operator==(Date lhs, Date rhs ){
+
+/*	HELPER FUNCTIONS   */
+
+
+//Overload of the == operator. Allows us to identify two equal dates.
+bool operator==(const Date& lhs, const Date& rhs ){
 
  if( lhs.get_day() == rhs.get_day() &&
      static_cast<int>(lhs.get_month())==static_cast<int>(rhs.get_month())&&
@@ -53,6 +60,7 @@ bool operator==(Date lhs, Date rhs ){
 
 }
 
+//Overload of the != operator. Allows us to identify two dirfferent dates.
 bool operator!=(Date lhs, Date rhs ){
 
 if(!(lhs == rhs)){
@@ -74,6 +82,18 @@ std::ostream& operator<<(std::ostream& os, Date d) {
 	
 	os << d.get_day()<<"/"<<d.get_month()<<"/"<<d.get_year() <<std::endl;
 	return os;
+}
+
+//Function that tells us if a specific year is leap or not. 
+
+bool is_leap(const int y){
+
+	if((y%4==0) &&(y%100!= 0) || (y%400 == 0)){
+	
+		return true;
+	
+	} else {return false;}
+
 }
 
 
@@ -109,10 +129,10 @@ int main(){
  
  bool test1 = (data1 == data2);
  bool test2 = (data1 == data3);
- 
+ bool test3 = is_leap(data.get_year());
  std::cout << "test 1 = " << test1 <<std::endl;
  std::cout << "test 2 = " << test2 <<std::endl;
- 
+ std::cout << "test 3 = " << test3 <<std::endl;
  return 0;
  
  
@@ -162,12 +182,25 @@ void Date::add_days(const unsigned int n){
   	break;
   	  	
   	case Month::feb:
-  	if(Date::day >28){
   	
-  		Date::day = Date::day - 28;
+  	//We distinguish two cases based on the fact that the year taken into account 
+  	//is leap or not.
+  	
+  	if(is_leap(Date::year)){
+  		if(Date::day >29){
+  	
+  		Date::day = Date::day - 29;
   		Date::month = itom(mese + 1);
+  		}
+  	}else{
+  		if(Date::day >28){
   	
-  	}
+  			Date::day = Date::day - 28;
+  			Date::month = itom(mese + 1);
+  	
+  		}
+             }
+  	
   	break;
   	  	
   	
@@ -191,41 +224,8 @@ void Date::add_days(const unsigned int n){
   		Date::year = Date::year + 1;
   	}
   	break;
-  	  	
-  	
-  	}
+       }
   
   counter += 1;
   }
  }
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
