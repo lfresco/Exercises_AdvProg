@@ -61,7 +61,7 @@ bool operator==(const Date& lhs, const Date& rhs ){
 }
 
 //Overload of the != operator. Allows us to identify two dirfferent dates.
-bool operator!=(Date lhs, Date rhs ){
+bool operator!=(const Date& lhs,const Date& rhs ){
 
 if(!(lhs == rhs)){
 	return true;
